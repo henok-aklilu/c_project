@@ -38,8 +38,17 @@ int _printf(const char *format, ...)
 			else if (format[i] == 's')
 			{
 				s = va_arg(args, char *);
-				write(1, s, strlen(s) + 1);
-				count += strlen(s);
+				if (s == NULL)
+				{
+					s = "(null)";
+					write(1, s, 6);
+					count += 6;
+				}
+				else
+				{
+					write(1, s, strlen(s) + 1);
+					count += strlen(s);
+				}
 			}
 			else
 			{
