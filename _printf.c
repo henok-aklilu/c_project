@@ -2,6 +2,8 @@
 #include <stdarg.h>
 #include <unistd.h>
 
+#define NULL 0
+
 /**
  * _printf - Printf function
  * @format: format.
