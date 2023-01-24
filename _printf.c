@@ -2,7 +2,9 @@
 #include <stdarg.h>
 #include <unistd.h>
 
-
+#ifndef NULL
+#define NULL 0
+#endif
 
 /**
  * _printf - Printf function
