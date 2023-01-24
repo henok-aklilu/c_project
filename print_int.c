@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * num_len - finds the length of a number
+ * num_len - finds the length of a number.
  * @n: the number to find his length
  *
  * Return: the number of characters to print
