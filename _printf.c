@@ -1,70 +1,50 @@
-#include <string.h>
-#include <stdarg.h>
-#include <unistd.h>
-
-#ifndef NULL
-#define NULL 0
-#endif
+#include "main.h"
+#include <limits.h>
+#include <stdio.h>
 
 /**
- * _printf - Printf function
- * @format: format.
- * Return: Printed chars.
+ * _printf - produces output according to a format
+ * @format: format string containing the characters and the specifiers
+ * Description: this function will call the get_print() function that will
+ * determine which printing function to call depending on the conversion
+ * specifiers contained into fmt
+ * Return: length of the formatted output string
  */
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int i, count = 0;
-	char c, *s;
+	int (*pfunc)(va_list, flags_t *);
+	const char *p;
+	va_list arguments;
+	flags_t flags = {0, 0, 0};
 
-	if (format == NULL)
+	register int count = 0;
+
+	va_start(arguments, format);
+	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
-	if (*format == 0)
-		return (0);
-	if (format[0] == '%' && format[1] == '\0')
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
-	va_start(args, format);
-	for (i = 0; format[i]; i++)
+	for (p = format; *p; p++)
 	{
-		if (format[i] == '%')
+		if (*p == '%')
 		{
-			i++;
-			if (format[i] == 0)
-				break;
-			if (format[i] == 'c')
+			p++;
+			if (*p == '%')
 			{
-				c = va_arg(args, int);
-				write(1, &c, 1);
-				count++;
+				count += _putchar('%');
+				continue;
 			}
-			else if (format[i] == 's')
-			{
-				s = va_arg(args, char *);
-				if (s == NULL)
-				{
-					s = "(null)";
-					write(1, s, 6);
-					count += 6;
-				}
-				else
-				{
-					write(1, s, strlen(s) + 1);
-					count += strlen(s);
-				}
-			}
-			else
-			{
-				write(1, &format[i], 1);
-				count++;
-			}
-		}
-		else
-		{
-			write(1, &format[i], 1);
-			count++;
-		}
+			while (get_flag(*p, &flags))
+				p++;
+			pfunc = get_print(*p);
+			count += (pfunc)
+				? pfunc(arguments, &flags)
+				: _printf("%%%c", *p);
+		} else
+			count += _putchar(*p);
 	}
-	va_end(args);
+	_putchar(-1);
+	va_end(arguments);
 	return (count);
-}
 
+}
