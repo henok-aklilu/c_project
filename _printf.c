@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdarg.h>
 #include <unistd.h>
+#include <stdio.h>
 
 /**
  * _printf - Printf function
@@ -14,10 +15,6 @@ int _printf(const char *format, ...)
 	char c, *s;
 
 	va_start(args, format);
-
-	if (format == NULL || *format == 0)
-		return (-1);
-
 	for (i = 0; format[i]; i++)
 	{
 		if (format[i] == '%')
@@ -32,8 +29,17 @@ int _printf(const char *format, ...)
 			else if (format[i] == 's')
 			{
 				s = va_arg(args, char *);
-				write(1, s, strlen(s) + 1);
-				count += strlen(s);
+				if (s == NULL)
+				{
+					s = "(null)";
+					write(1, s, 6);
+					count += 6;
+				}
+				else
+				{
+					write(1, s, strlen(s) + 1);
+					count += strlen(s);
+				}
 			}
 			else
 			{
@@ -50,3 +56,12 @@ int _printf(const char *format, ...)
 	va_end(args);
 	return (count);
 }
+
+int main(void)
+{
+	_printf(" %c", _printf("H%c", 'A') + 48);
+
+	return (0);
+}
+
+
