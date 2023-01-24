@@ -2,7 +2,7 @@
 <h1 >0x12. C -printf team project </h1>
 <h3> * By: Julien Barbier, co-founder & CEO </h3>
 <h3> * Project to be done in teams of 2 people (your team:Henok Aklilu and Binyam Mamo)
-<h3>   TASK </h3>
+<h3 align="center" ><b>TASK </b></h3>
 <h6>0. I'm not going anywhere. You can print that wherever you want to. I'm here and I'm a Spur for life
      Repo:
       GitHub repository: printf</h6>
