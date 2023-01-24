@@ -17,15 +17,13 @@ int _printf(const char *format, ...)
 	int i, count = 0;
 	char c, *s;
 
-	va_start(args, format);
-
 	if (format == NULL)
 		return (-1);
 	if (*format == 0)
 		return (0);
 	if (format[0] == '%' && format[1] == '\0')
 		return (-1);
-
+	va_start(args, format);
 	for (i = 0; format[i]; i++)
 	{
 		if (format[i] == '%')
