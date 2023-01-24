@@ -1,3 +1,4 @@
+<h1> <img src="https://s3.amazonaws.com/intranet-projects-files/holbertonschool-low_level_programming/228/printf.png"?raw=true" /> </h1>
 <h1 >0x12. C -printf team project </h1>
 <h3> * By: Julien Barbier, co-founder & CEO </h3>
 <h3> * Project to be done in teams of 2 people (your team:Henok Aklilu and Binyam Mamo)
